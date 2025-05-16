@@ -1,0 +1,56 @@
+.card {
+  border-radius: 10px;
+  border: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+.file-upload-container {
+  position: relative;
+
+  input[type="file"] {
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #0d6efd;
+    }
+  }
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+  }
+}
+
+.alert {
+  border-radius: 8px;
+  border-left-width: 4px;
+}
+
+.alert-danger {
+  border-left-color: #dc3545;
+}
+
+.alert-success {
+  border-left-color: #198754;
+}
+
+.alert-info {
+  border-left-color: #0dcaf0;
+}

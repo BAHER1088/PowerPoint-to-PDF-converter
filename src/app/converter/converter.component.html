@@ -1,0 +1,79 @@
+<div class="card shadow">
+  <div class="card-body p-4">
+    <!-- File Upload Section -->
+    <div class="mb-4">
+      <div class="file-upload-container">
+        <label for="fileUpload" class="form-label">Select PowerPoint File</label>
+        <input
+          type="file"
+          class="form-control"
+          id="fileUpload"
+          accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
+          (change)="onFileSelected($event)"
+        >
+        <small class="text-muted d-block mt-1">Supported formats: .ppt, .pptx (Max size: 10MB)</small>
+      </div>
+    </div>
+
+    <!-- Selected File Info -->
+    <div class="mb-4" *ngIf="selectedFile">
+      <div class="alert alert-info">
+        <strong>Selected file:</strong> {{ selectedFile.name }} ({{ (selectedFile.size / 1024 / 1024).toFixed(2) }} MB)
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="mb-4" *ngIf="errorMessage">
+      <div class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="mb-4" *ngIf="successMessage">
+      <div class="alert alert-success">
+        {{ successMessage }}
+      </div>
+    </div>
+
+    <!-- Conversion Status -->
+    <div class="mb-4" *ngIf="isLoading && conversionStatus">
+      <div class="alert alert-info">
+        <div class="d-flex align-items-center">
+          <app-loading-spinner></app-loading-spinner>
+          <span class="ms-2">{{ conversionStatus }}</span>
+        </div>
+        <div class="progress mt-2" *ngIf="uploadProgress > 0">
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            [style.width.%]="uploadProgress"
+            [attr.aria-valuenow]="uploadProgress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [attr.aria-label]="'Upload progress: ' + uploadProgress + '%'"
+            [attr.title]="'Upload progress: ' + uploadProgress + '%'">
+            {{ uploadProgress }}%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Convert Button -->
+    <div class="d-grid">
+      <button
+        type="button"
+        class="btn btn-primary btn-lg"
+        [disabled]="!selectedFile || isLoading"
+        (click)="convertToPdf()"
+      >
+        <span *ngIf="!isLoading">Convert to PDF</span>
+        <span *ngIf="isLoading">
+          <app-loading-spinner></app-loading-spinner>
+          Converting...
+        </span>
+      </button>
+    </div>
+    <p class="text-center mt-5">Made by: Baher Hossam Tolba</p>
+  </div>
+</div>
